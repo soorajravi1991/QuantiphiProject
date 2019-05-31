@@ -1,0 +1,64 @@
+
+<div style="overflow:auto">
+  <div class="menu">
+   
+  </div>
+  <div style="background-color:#e5e5e5;text-align:center;padding:10px;margin-top:7px;">
+	<div class="row">
+	  	<div class="col-3">
+	  		<span>From</span><br/>
+			<input [(ngModel)]="fromDateFilter" (ngModelChange)="getOrderData()" type="text" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"/>
+		</div>
+	  	<div class="col-3">
+	  		<span>To</span><br/>
+			<input [(ngModel)]="toDateFilter" (ngModelChange)="getOrderData()" type="text" ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()"/>
+		</div>
+		<div class="col-3">
+			<span>Seller Name</span>	  	
+			<input [(ngModel)]="sellerName" (ngModelChange)="getOrderData()" type="text"/>
+		</div>
+
+	  	<div class="col-2">
+		  	<span>Status</span>
+				<select  [(ngModel)]="orderStatusFilter" (change)="getOrderData()">
+					<option [value]="'1'">Successful</option>
+					<option [value]="'0'">Failed</option>
+				</select>	
+	  	</div>
+	</div> 
+</div>
+<div *ngIf="pieChartDataReady && pieChartData.length" style="display: block;">
+  <canvas #piechart baseChart 
+    [data]="pieChartData" 
+    [labels]="pieChartLabels" 
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend"
+    [colors]="donutColors"
+    >
+  </canvas>
+</div>
+
+<div *ngIf="pieChartDataReady && !pieChartData.length" class="row" >
+ 	<div class="jumbotron jumbo">
+  		<h4>No Data Found</h4>
+	</div>
+</div>
+<div class="main">
+	<h2>Popular Products</h2>   
+</div>
+<div class="">
+	<div *ngIf="barChartDataReady" style="display: block;">
+	  	<canvas baseChart 
+		    [datasets]="barChartData"
+		    [labels]="barChartLabels"
+		    [options]="barChartOptions"
+		    [plugins]="barChartPlugins"
+		    [legend]="barChartLegend"
+		    [chartType]="barChartType"
+		    >
+	  	</canvas>
+	</div>
+</div>
+</div>
